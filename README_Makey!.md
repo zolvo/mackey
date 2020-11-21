@@ -18,6 +18,10 @@ Bonus:
 - star ratings
 ```
 
+## DB Diagrams
+
+![picture](makey-db.jpg)
+
 ## Components
 
 ### `Top Navbar`
