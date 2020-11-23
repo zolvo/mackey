@@ -22,6 +22,11 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false,
       },
+      avatar: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: faker.internet.avatar(),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
