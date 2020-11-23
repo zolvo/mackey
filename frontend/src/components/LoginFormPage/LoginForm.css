@@ -1,0 +1,12 @@
+.form {
+  box-sizing: border-box;
+  background-color: lightcyan;
+  width: 24em;
+  height: 18em;
+  border: 1px solid pink;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  padding: 20px;
+}
