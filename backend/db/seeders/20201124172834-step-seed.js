@@ -76,6 +76,37 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          stepNumber: 1,
+          projectId: 3,
+          title: "Number 1",
+          description: "Create all the possibilities",
+          photo: null,
+          video: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          stepNumber: 2,
+          projectId: 3,
+          title: "Number 2",
+          description: "It might be a spaghetti also",
+          photo: "/images/spaghetti.jpg",
+          video: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          stepNumber: 3,
+          projectId: 3,
+          title: "Number 3",
+          description:
+            "I don't know what to decide, I'm just going to sleep now",
+          photo: null,
+          video: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

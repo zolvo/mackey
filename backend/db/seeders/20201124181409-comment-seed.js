@@ -33,6 +33,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          userId: 2,
+          projectId: 3,
+          text: "I think you are still dreaming",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
