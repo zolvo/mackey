@@ -39,6 +39,31 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate(models) {
       // define association here
+      User.hasMany(models.Project, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
+      User.hasMany(models.Comment, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
+      const columnMapping = {
+        as: "following",
+        through: "Follow", // This is the model name referencing the join table.
+        otherKey: "followableId",
+        foreignKey: "userId",
+      };
+      User.belongsToMany(models.User, columnMapping);
+
+      const followersMapping = {
+        as: "followers",
+        through: "Follow", // This is the model name referencing the join table.
+        otherKey: "userId",
+        foreignKey: "followableId",
+      };
+      User.belongsToMany(models.User, followersMapping);
     }
   }
   User.init(
@@ -71,7 +96,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       avatar: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
     },
     {
