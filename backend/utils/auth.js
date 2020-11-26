@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { jwtConfig } = require("../config");
 const { User } = require("../db/models");
+const bearerToken = require("express-bearer-token");
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -10,7 +11,7 @@ const setTokenCookie = (res, user) => {
   const token = jwt.sign(
     { data: user.toSafeObject() },
     secret,
-    { expiresIn: parseInt(expiresIn) }, // 604,800 seconds = 1 week
+    { expiresIn: parseInt(expiresIn) } // 604,800 seconds = 1 week
   );
 
   const isProduction = process.env.NODE_ENV === "production";
@@ -49,18 +50,61 @@ const restoreUser = (req, res, next) => {
   });
 };
 
+const restoreTemplateUser = async (req, res, next) => {
+  const { token } = req;
+
+  if (!token) {
+    return next();
+  }
+  return jwt.verify(token, secret, null, async (err, jwtPayload) => {
+    // Define asynchronous function for jwtPayload logic
+    if (err) {
+      console.log(err, token);
+      next();
+      return;
+    }
+
+    const { id } = jwtPayload.data;
+
+    try {
+      req.user = await User.findByPk(id);
+    } catch (e) {
+      return next(e);
+    }
+
+    if (!req.user) {
+      return res.set("WWW-Authenticate", "Bearer").status(401).end();
+    }
+
+    return next();
+  });
+};
+
 // If there is no current user, return an error
 const requireAuth = [
   restoreUser,
   function (req, res, next) {
     if (req.user) return next();
 
-    const err = new Error('Unauthorized');
-    err.title = 'Unauthorized';
-    err.errors = ['Unauthorized'];
+    const err = new Error("Unauthorized");
+    err.title = "Unauthorized";
+    err.errors = ["Unauthorized"];
     err.status = 401;
     return next(err);
   },
 ];
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+const checkAuth = [
+  function (req, res, next) {
+    if (req.user) return next();
+
+    const err = new Error("Unauthorized");
+    err.title = "Unauthorized";
+    err.errors = ["Unauthorized"];
+    err.status = 401;
+    return next(err);
+  },
+  restoreTemplateUser,
+];
+
+module.exports = { setTokenCookie, restoreUser, requireAuth, checkAuth };

@@ -17,19 +17,23 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Projects" },
       },
-      title: {
+      stepTitle: {
         allowNull: false,
         type: Sequelize.STRING(200),
+        unique: true,
       },
-      description: {
+      stepDescription: {
         allowNull: false,
         type: Sequelize.TEXT,
+        unique: true,
       },
       photo: {
         type: Sequelize.STRING,
+        unique: true,
       },
       video: {
         type: Sequelize.STRING,
+        unique: true,
       },
       createdAt: {
         allowNull: false,

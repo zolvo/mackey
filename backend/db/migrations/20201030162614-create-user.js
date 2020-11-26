@@ -27,6 +27,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: faker.internet.avatar(),
+        unique: true,
       },
       createdAt: {
         allowNull: false,

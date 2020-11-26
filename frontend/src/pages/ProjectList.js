@@ -1,21 +1,34 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { projectFetch } from "../store/projectReducer";
 
 function ProjectList() {
+  const projects = useSelector((state) => state.project);
+  const dispatch = useDispatch();
   const history = useHistory();
-  const detail = () => history.push("/project/:id");
+
+  useEffect(() => {
+    dispatch(projectFetch());
+  }, [dispatch]);
+
+  const allProjects = () => history.push("/project");
 
   return (
     <Wrapper>
       <Title>HOW I CAN HELP YOU</Title>
       <Container>
         <Box>
-          <Picture>TITLE</Picture>
+          <Picture>
+            {projects && projects[0] && projects[0].photo}
+            {projects && projects[0] && projects[0].projectTitle}
+          </Picture>
           <Line />
+          Detail
           <Description />
-          <button onClick={detail}>Detail</button>
         </Box>
+        <button onClick={allProjects}>All Projects</button>
       </Container>
     </Wrapper>
   );
@@ -53,6 +66,7 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5em;
 `;
 
 const Picture = styled.div`

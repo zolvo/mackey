@@ -7,8 +7,8 @@ module.exports = {
       [
         {
           userId: 1,
-          title: "PIZZA",
-          description: "how to make Pizza",
+          projectTitle: "PIZZA",
+          projectDescription: "how to make Pizza",
           photo: "/images/pizza.png",
           video: null,
           createdAt: new Date(),
@@ -16,8 +16,8 @@ module.exports = {
         },
         {
           userId: 3,
-          title: "Sunny Egg",
-          description: "let's make a happy Sunny Egg",
+          projectTitle: "Sunny Egg",
+          projectDescription: "let's make a happy Sunny Egg",
           photo: "/images/sunny-egg.jpg",
           video: "/videos/sunny-egg.mp4",
           createdAt: new Date(),
@@ -25,8 +25,8 @@ module.exports = {
         },
         {
           userId: 1,
-          title: "RAMEN",
-          description: "I'm so crazy with this one",
+          projectTitle: "RAMEN",
+          projectDescription: "I'm so crazy with this one",
           photo: "/images/noodles.png",
           video: null,
           createdAt: new Date(),
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Projects", null, {});
+    await queryInterface.bulkDelete("Project", null, {});
     /**
      * Add commands to revert seed here.
      *

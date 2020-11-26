@@ -2,6 +2,8 @@ const router = require("express").Router();
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
 
+const projectRouter = require("./project.js");
+
 // // GET /api/set-token-cookie
 // const asyncHandler = require('express-async-handler');
 // const { setTokenCookie } = require('../../utils/auth.js');
@@ -41,6 +43,8 @@ router.post("/test", function (req, res) {
 });
 
 router.use("/session", sessionRouter);
+
+router.use("/projects", projectRouter);
 
 router.use("/users", usersRouter);
 

@@ -13,19 +13,23 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Users" },
       },
-      title: {
+      projectTitle: {
         allowNull: false,
         type: Sequelize.STRING(200),
+        unique: true,
       },
-      description: {
+      projectDescription: {
         allowNull: false,
         type: Sequelize.TEXT,
+        unique: true,
       },
       photo: {
         type: Sequelize.STRING,
+        unique: true,
       },
       video: {
         type: Sequelize.STRING,
+        unique: true,
       },
       createdAt: {
         allowNull: false,

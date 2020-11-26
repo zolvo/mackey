@@ -26,19 +26,23 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      title: {
+      stepTitle: {
         type: DataTypes.STRING(200),
         allowNull: false,
+        unique: true,
       },
-      description: {
+      stepDescription: {
         type: DataTypes.TEXT,
         allowNull: false,
+        unique: true,
       },
       photo: {
         type: DataTypes.STRING,
+        unique: true,
       },
       video: {
         type: DataTypes.STRING,
+        unique: true,
       },
     },
     {

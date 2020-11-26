@@ -32,11 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      title: {
+      projectTitle: {
         type: DataTypes.STRING(200),
         allowNull: false,
       },
-      description: {
+      projectDescription: {
         type: DataTypes.TEXT,
         allowNull: false,
       },

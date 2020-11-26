@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import Project from "./pages/Projects";
 import Home from "./pages/Home";
 import Main from "./pages/Main";
 import NotFound from "./pages/NotFound";
-import { ProtectedRoute } from "./util/Route";
+import ProjectAdd from "./pages/ProjectAdd";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,16 +34,20 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/main" component={Main} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      )}
+      <BrowserRouter>
+        <Navigation isLoaded={isLoaded} />
+        {isLoaded && (
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/main" component={Main} />
+            <Route path="/project/add" component={ProjectAdd} />
+            <Route path="/project" component={Project} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        )}
+      </BrowserRouter>
     </>
   );
 }

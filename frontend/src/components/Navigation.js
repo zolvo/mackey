@@ -24,6 +24,8 @@ function Navigation({ isLoaded }) {
     );
   }
 
+  const handleSubmit = () => {};
+
   return (
     <NavWrapper>
       <li>
@@ -31,16 +33,23 @@ function Navigation({ isLoaded }) {
           <img src={logo} alt={logo} />
           <span className="logoName">Makey!</span>
         </div>
-        <NavLink exact to="/main">
-          <i className="fas fa-home"></i>
-          <span className="home">Home</span>
-        </NavLink>
+        <div>
+          <NavLink exact to="/main">
+            <i className="fas fa-home"></i>
+            <span className="home">Home</span>
+          </NavLink>
+          <NavLink exact to="/project">
+            <i className="far fa-folder"></i>
+            <span className="home">Projects</span>
+          </NavLink>
+        </div>
         <div>
           <i className="fas fa-search"></i>
           <input
             className="searchBar"
             type="text"
             placeholder="find project, recipe, interest"
+            onSubmit={handleSubmit}
           />
         </div>
         {isLoaded && sessionLinks}
@@ -93,6 +102,11 @@ const NavWrapper = styled.div`
 
   .fa-search {
     color: #413f39;
+  }
+
+  .fa-folder {
+    color: #413f39;
+    padding-left: 1.5em;
   }
 
   .searchBar {

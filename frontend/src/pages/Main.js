@@ -9,9 +9,9 @@ function Main() {
   return (
     <MainWrapper>
       <FirstPage>
-        {/* <ImageContainer>
+        <ImageContainer1>
           <img src={DIY} alt={DIY} />
-        </ImageContainer> */}
+        </ImageContainer1>
         <div className="title">MAKE SOMETHING TO MAKE YOU HAPPY</div>
         <div className="logo">CREATE</div>
         <div className="words">ANY OF YOUR INTEREST</div>
@@ -32,7 +32,7 @@ function Main() {
             </p>
           </div>
         </TextContainer>
-        <ImageContainer />
+        <ImageContainer2 />
       </SecondPage>
       <ThirdPage>
         <ProjectList />
@@ -52,7 +52,16 @@ const MainWrapper = styled.div`
   flex-direction: column;
 `;
 
-const ImageContainer = styled.div`
+const ImageContainer1 = styled.div`
+  img {
+    box-sizing: border-box;
+    // opacity: 0.5;
+    width: 50%;
+    padding-top: 2em;
+  }
+`;
+
+const ImageContainer2 = styled.div`
   box-sizing: border-box;
   background-image: url(${test01});
   height: 80%;
@@ -82,7 +91,7 @@ const FirstPage = styled.div`
     letter-spacing: 0.18em;
     font-weight: 700;
     padding-top: 100px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
   }
 
   .logo {
@@ -136,7 +145,7 @@ const SecondPage = styled.div`
 const ThirdPage = styled.div`
   background-color: lightcyan;
   text-align: center;
-  height: 720px;
+  height: 730px;
   width: 100%;
 `;
 const FourthPage = styled.div`
