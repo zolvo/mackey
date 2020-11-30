@@ -1,27 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../db/models");
-const { checkAuth } = require("../../utils/auth.js");
-
 const { Project, Step, User } = db;
+const { checkAuth } = require("../../utils/auth.js");
 
 const asyncHandler = (handler) => (req, res, next) =>
   handler(req, res, next).catch(next);
 
-// router.post(
-//   "/projectAdd",
-//   asyncHandler(async (req, res) => {
-//     const { projectTitle, projectDescription, userId, photo, video } = req.body;
-//     const project = await Project.create({
-//       projectTitle,
-//       projectDescription,
-//       userId,
-//       photo,
-//       video,
-//     });
-//     res.json({ project });
-//   })
-// );
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {
+    const { projectTitle, projectDescription, userId, photo, video } = req.body;
+    const projects = await Project.create({
+      projectTitle,
+      projectDescription,
+      userId,
+      photo,
+      video,
+    });
+    res.json({ projects });
+  })
+);
 
 router.get(
   "/",

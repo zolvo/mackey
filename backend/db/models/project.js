@@ -1,56 +1,64 @@
 "use strict";
-const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Project extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      Project.hasMany(models.Step, {
-        foreignKey: "projectId",
-        onDelete: "CASCADE",
-        hooks: true,
-      });
-      Project.hasMany(models.Comment, {
-        foreignKey: "projectId",
-        onDelete: "CASCADE",
-        hooks: true,
-      });
-      Project.belongsTo(models.User, {
-        foreignKey: "userId",
-        onDelete: "CASCADE",
-        hooks: true,
-      });
-    }
-  }
-  Project.init(
+  const Project = sequelize.define(
+    "Project",
     {
-      userId: {
-        type: DataTypes.INTEGER,
+      id: {
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      userId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
       },
       projectTitle: {
-        type: DataTypes.STRING(200),
         allowNull: false,
+        type: DataTypes.STRING(200),
+        unique: true,
       },
       projectDescription: {
-        type: DataTypes.TEXT,
         allowNull: false,
+        type: DataTypes.TEXT,
+        unique: true,
       },
       photo: {
         type: DataTypes.STRING,
+        unique: true,
       },
       video: {
         type: DataTypes.STRING,
+        unique: true,
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
       },
     },
-    {
-      sequelize,
-      modelName: "Project",
-    }
+    {}
   );
+  Project.associate = function (models) {
+    // associations can be defined here
+    Project.hasMany(models.Step, {
+      foreignKey: "projectId",
+      onDelete: "CASCADE",
+      hooks: true,
+    });
+    Project.hasMany(models.Comment, {
+      foreignKey: "projectId",
+      onDelete: "CASCADE",
+      hooks: true,
+    });
+    Project.belongsTo(models.User, {
+      foreignKey: "userId",
+      onDelete: "CASCADE",
+      hooks: true,
+    });
+  };
   return Project;
 };

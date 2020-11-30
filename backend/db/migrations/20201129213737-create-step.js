@@ -1,24 +1,28 @@
 "use strict";
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Projects", {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable("Steps", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      stepNumber: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "Users" },
       },
-      projectTitle: {
+      projectId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: "Projects" },
+      },
+      stepTitle: {
         allowNull: false,
         type: Sequelize.STRING(200),
         unique: true,
       },
-      projectDescription: {
+      stepDescription: {
         allowNull: false,
         type: Sequelize.TEXT,
         unique: true,
@@ -41,7 +45,7 @@ module.exports = {
       },
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Projects");
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable("Steps");
   },
 };

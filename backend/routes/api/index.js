@@ -1,13 +1,13 @@
 const router = require("express").Router();
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
-
+const searchRouter = require("./search.js");
 const projectRouter = require("./project.js");
 
 // // GET /api/set-token-cookie
 // const asyncHandler = require('express-async-handler');
 // const { setTokenCookie } = require('../../utils/auth.js');
-// const { User } = require('../../db/models');
+// const { User } = require("../../db/models");
 // router.get('/set-token-cookie', asyncHandler(async (req, res) => {
 //   const user = await User.findOne({
 //       where: {
@@ -38,9 +38,11 @@ const projectRouter = require("./project.js");
 //   }
 // );
 
-router.post("/test", function (req, res) {
-  res.json({ requestBody: req.body });
-});
+// router.post("/project", function (req, res) {
+//   res.json({ requestBody: req.body });
+// });
+
+router.use("/search", searchRouter);
 
 router.use("/session", sessionRouter);
 

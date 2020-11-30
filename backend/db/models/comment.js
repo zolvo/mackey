@@ -1,45 +1,50 @@
 "use strict";
-const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Comment extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      Comment.belongsTo(models.User, {
-        foreignKey: "userId",
-        onDelete: "CASCADE",
-        hooks: true,
-      });
-      Comment.belongsTo(models.Project, {
-        foreignKey: "projectId",
-        onDelete: "CASCADE",
-        hooks: true,
-      });
-    }
-  }
-  Comment.init(
+  const Comment = sequelize.define(
+    "Comment",
     {
-      userId: {
-        type: DataTypes.INTEGER,
+      id: {
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      userId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
       },
       projectId: {
-        type: DataTypes.INTEGER,
         allowNull: false,
+        type: DataTypes.INTEGER,
       },
       commentText: {
-        type: DataTypes.TEXT,
         allowNull: false,
+        type: DataTypes.TEXT,
+        unique: true,
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
       },
     },
-    {
-      sequelize,
-      modelName: "Comment",
-    }
+    {}
   );
+  Comment.associate = function (models) {
+    // associations can be defined here
+    Comment.belongsTo(models.User, {
+      foreignKey: "userId",
+      onDelete: "CASCADE",
+      hooks: true,
+    });
+    Comment.belongsTo(models.Project, {
+      foreignKey: "projectId",
+      onDelete: "CASCADE",
+      hooks: true,
+    });
+  };
   return Comment;
 };

@@ -158,6 +158,7 @@ const SignupWrapper = styled.div`
     height: 3em;
     padding-left: 1em;
     border-radius: 1em;
+    outline: none;
 
     transition: all 0.2x ease-in;
     &:hover {

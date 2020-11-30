@@ -119,6 +119,7 @@ const NavWrapper = styled.div`
     box-sizing: border-box;
     height: 30px;
     border-radius: 20px;
+    outline: none;
 
     border: 1px solid #ffffff;
     background-color: #fefefe;
@@ -127,6 +128,7 @@ const NavWrapper = styled.div`
   .home {
     font-size: 14px;
     padding-left: 5px;
+    color: grey;
   }
 
   .welcome {

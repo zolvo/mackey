@@ -13,6 +13,7 @@ router.post(
   checkAuth,
   asyncHandler(async (req, res, next) => {
     let { search } = req.body;
+
     let relevantProjects = [];
     let projectIds = [];
     let stepDescriptions = [];
@@ -46,7 +47,7 @@ router.post(
         stepDescriptions: [],
       };
     } else {
-      console.log(projectIds);
+      // console.log(projectIds);
 
       // Loop throught steps and find associated projects
       stepDescriptions = await Step.findAll({
@@ -71,7 +72,6 @@ router.post(
       relevantProjects,
       noRelevantProjects,
       search,
-      title: "Search Results",
     });
   })
 );

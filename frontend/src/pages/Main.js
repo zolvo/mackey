@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import DIY from "../assets/DIY.jpg";
-import test01 from "../assets/test01.jpg";
+import DIY2 from "../assets/DIY2.jpg";
 import About from "./About";
-import ProjectList from "./ProjectList";
+import ProjectMain from "../components/ProjectMain";
 
 function Main() {
   return (
@@ -35,7 +35,7 @@ function Main() {
         <ImageContainer2 />
       </SecondPage>
       <ThirdPage>
-        <ProjectList />
+        <ProjectMain />
       </ThirdPage>
       <FourthPage>
         <About />
@@ -63,7 +63,7 @@ const ImageContainer1 = styled.div`
 
 const ImageContainer2 = styled.div`
   box-sizing: border-box;
-  background-image: url(${test01});
+  background-image: url(${DIY2});
   height: 80%;
   width: 50%;
   background-position: center;

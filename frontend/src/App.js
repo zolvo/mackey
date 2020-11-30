@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import Project from "./pages/Projects";
+import ProjectList from "./pages/ProjectList";
 import Home from "./pages/Home";
 import Main from "./pages/Main";
 import NotFound from "./pages/NotFound";
 import ProjectAdd from "./pages/ProjectAdd";
+import Search from "./pages/Search";
+import Project from "./pages/Project";
+import { projectFetch } from "./store/projectReducer";
 
 function App() {
+  const projects = useSelector((state) => state.project);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(projectFetch());
+  }, [dispatch]);
+
+  // useEffect =
 
   // const sessionUser = useSelector((state) => state.session.user);
 
@@ -40,8 +50,19 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/main" component={Main} />
+            <Route path="/search" component={Search} />
             <Route path="/project/add" component={ProjectAdd} />
-            <Route path="/project" component={Project} />
+            <Route
+              path="/project/:id"
+              component={Project}
+              // render={(projects) => (
+              //   <Project
+              //     projectId={useParams(projects.id)}
+              //     projects={projects}
+              //   />
+              // )}
+            />
+            <Route path="/project" component={ProjectList} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="*" component={NotFound} />

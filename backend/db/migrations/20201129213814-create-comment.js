@@ -1,38 +1,26 @@
 "use strict";
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Steps", {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable("Comments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      stepNumber: {
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: "Users" },
       },
       projectId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Projects" },
       },
-      stepTitle: {
-        allowNull: false,
-        type: Sequelize.STRING(200),
-        unique: true,
-      },
-      stepDescription: {
+      commentText: {
         allowNull: false,
         type: Sequelize.TEXT,
-        unique: true,
-      },
-      photo: {
-        type: Sequelize.STRING,
-        unique: true,
-      },
-      video: {
-        type: Sequelize.STRING,
         unique: true,
       },
       createdAt: {
@@ -45,7 +33,7 @@ module.exports = {
       },
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Steps");
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable("Comments");
   },
 };
