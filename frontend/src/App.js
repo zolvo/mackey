@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import * as sessionActions from "./store/session";
@@ -55,6 +55,7 @@ function App() {
             <Route
               path="/project/:id"
               component={Project}
+              projects={projects}
               // render={(projects) => (
               //   <Project
               //     projectId={useParams(projects.id)}
